@@ -1,0 +1,14 @@
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.AssemblyInfoInputs.cache
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.AssemblyInfo.cs
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.csproj.CoreCompileInputs.cache
+D:\Programming\csharp-projects\SimpleHabitTracker\bin\Debug\net9.0\SimpleHabitTracker.exe
+D:\Programming\csharp-projects\SimpleHabitTracker\bin\Debug\net9.0\SimpleHabitTracker.deps.json
+D:\Programming\csharp-projects\SimpleHabitTracker\bin\Debug\net9.0\SimpleHabitTracker.runtimeconfig.json
+D:\Programming\csharp-projects\SimpleHabitTracker\bin\Debug\net9.0\SimpleHabitTracker.dll
+D:\Programming\csharp-projects\SimpleHabitTracker\bin\Debug\net9.0\SimpleHabitTracker.pdb
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.dll
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\refint\SimpleHabitTracker.dll
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.pdb
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\SimpleHabitTracker.genruntimeconfig.cache
+D:\Programming\csharp-projects\SimpleHabitTracker\obj\Debug\net9.0\ref\SimpleHabitTracker.dll
