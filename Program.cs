@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 
+
 namespace SimpleHabitTracker
 {
     class Program
@@ -30,18 +31,35 @@ namespace SimpleHabitTracker
         }
 
 
-
         static void ReadJsonData()
         {
             if (File.Exists(Json))
             {
+                FileInfo file = new FileInfo(Json);
+                if (file.Length == 0) {
+                    string emptyBody = "[]";
+                    File.WriteAllText(Json, emptyBody);
+                }
+
                 string jsonString = File.ReadAllText(Json);
                 habits = JsonSerializer.Deserialize<List<Habit>>(jsonString);
-                habitIdTracker = habits.Last().Id; // Store the last habit ID, so the program can know how to auto increment.
+
+                if (habits.Count > 0)
+                {
+                    habitIdTracker = habits.Last().Id; // Store the last habit ID, so the program can know how to auto increment.
+                } else
+                {
+                    habitIdTracker = 0; // If there are no habits to begin with.
+                }
+                                
             }
             else
             {
-                Console.WriteLine("Error: Json file doesn't exist!");
+                using (FileStream createStream = File.Create(Json))
+                {
+                    Console.WriteLine("Json file doesn't exist, creating one...\n");
+                }
+                
             }
         }
 
