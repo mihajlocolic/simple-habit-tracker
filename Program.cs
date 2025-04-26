@@ -24,7 +24,7 @@ namespace SimpleHabitTracker
             string jsonString = File.ReadAllText(Json);
             habits = JsonSerializer.Deserialize<List<Habit>>(jsonString);
 
-            int habitIdTracker = habits[habits.Count - 1].Id; // Should get the last index habit and get the id.
+            int habitIdTracker = habits.Last().Id;
 
             while (programRunning)
             {
