@@ -21,8 +21,17 @@ namespace SimpleHabitTracker
 
             // Loading the habits from the json file.
             List<Habit> habits = new List<Habit>();
-            string jsonString = File.ReadAllText(Json);
-            habits = JsonSerializer.Deserialize<List<Habit>>(jsonString);
+
+            if (File.Exists(Json))
+            {
+                string jsonString = File.ReadAllText(Json);
+                habits = JsonSerializer.Deserialize<List<Habit>>(jsonString);
+            }
+            else
+            {
+                Console.WriteLine("Error: Json file doesn't exist!");
+            }
+
 
             int habitIdTracker = habits.Last().Id;
 
@@ -32,6 +41,7 @@ namespace SimpleHabitTracker
                 Console.WriteLine("1. Add new habit.");
                 Console.WriteLine("2. Mark habit as done.");
                 Console.WriteLine("3. View habits.");
+                Console.WriteLine("4. Delete habit.");
                 Console.WriteLine("0. Exit.");
 
                 Console.WriteLine("Choose: ");
@@ -57,6 +67,7 @@ namespace SimpleHabitTracker
                             habits.Add(habit);
 
                             Console.WriteLine("Habit added!");
+                            SaveHabits(habits);
                             break;
                         case 2:
                             Console.WriteLine("Enter habit Id:");
@@ -79,6 +90,7 @@ namespace SimpleHabitTracker
                                     {
                                         habits[habitIdx] = habits[habitIdx] with { Status = Status.Done };
                                         Console.WriteLine("Marked as done.");
+                                        SaveHabits(habits);
                                     }
                                 }
                             }
@@ -88,16 +100,52 @@ namespace SimpleHabitTracker
                             }
                             break;
                         case 3:
+
+                            List<Habit> pendingHabits = new List<Habit>();
+                            List<Habit> completedHabits = new List<Habit>();
                             foreach (Habit h in habits)
                             {
                                 if (h.Status == Status.Pending)
                                 {
-                                    Console.WriteLine($"[] Habit({h.Id}) {h.Name} - Created on: {h.CreatedOn}");
+                                    pendingHabits.Add(h);
                                 }
                                 else
                                 {
-                                    Console.WriteLine($"[X] Habit({h.Id}) {h.Name} - Created on: {h.CreatedOn}");
+                                    completedHabits.Add(h);
                                 }
+                            }
+
+                            Console.WriteLine("\nPENDING HABITS:");
+                            foreach (Habit h in pendingHabits)
+                            {
+                                Console.WriteLine($"Habit({h.Id}) {h.Name} - Created on: {h.CreatedOn}");
+                            }
+
+                            Console.WriteLine("\nCOMPLETED HABITS:");
+                            foreach(Habit h in completedHabits)
+                            {
+                                Console.WriteLine($"Habit({h.Id}) {h.Name} - Created on: {h.CreatedOn}");
+                            }
+                            Console.WriteLine("\n");
+                            break;
+                            case 4:
+                                Console.WriteLine("Enter habit Id:");
+                                int habitId;
+                                bool parseRslt = int.TryParse(Console.ReadLine(), out habitId);
+
+                            if (parseRslt)
+                            {
+                                int habitIdx = habits.FindIndex((h) => { return h.Id == habitId; });  
+                                if (habitIdx != -1)
+                                {
+                                    habits.Remove(habits[habitIdx]);
+                                    Console.WriteLine("Habit removed.");
+                                    SaveHabits(habits);
+                                } else
+                                {
+                                    Console.WriteLine("Couldn't find that habit.");
+                                }
+                             
                             }
                             break;
                         default:
@@ -114,14 +162,18 @@ namespace SimpleHabitTracker
 
         static void SaveHabits(List<Habit> habits)
         {
-
-            using (StreamWriter sw = new StreamWriter(Json))
+            if (File.Exists(Json))
             {
-                string json = JsonSerializer.Serialize(habits);
-                sw.WriteLine(json);
-                sw.Close();   
+                using (StreamWriter sw = new StreamWriter(Json))
+                {
+                    string json = JsonSerializer.Serialize(habits);
+                    sw.WriteLine(json);
+                }
             }
-
+            else
+            {
+                Console.WriteLine("Error: JSON file missing. Cannot save.");
+            }
         }
 
     }
