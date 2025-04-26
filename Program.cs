@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace SimpleHabitTracker
 {
@@ -21,34 +19,12 @@ namespace SimpleHabitTracker
         {
             bool programRunning = true;
 
-            //var testHabit = new Habit(1, "Learn C#", Status.Pending, DateTime.Now);
-            //string jsonFilename = "habits.json";
-            //await using FileStream createStream = File.Create(jsonFilename);
-            //await JsonSerializer.SerializeAsync(createStream, testHabit);
-            //Console.WriteLine(File.ReadAllText(jsonFilename));
-
-
-
             // Loading the habits from the json file.
             List<Habit> habits = new List<Habit>();
-
-
             string jsonString = File.ReadAllText(Json);
             habits = JsonSerializer.Deserialize<List<Habit>>(jsonString);
 
-
-
-            //List<Habit> dest = habits.Select(h =>
-            //{
-            //    return new Habit(h.Id, h.Name, h.Status, h.CreatedOn);
-            //}).ToList();
-
-            //string jsonString = JsonSerializer.Serialize(dest, new JsonSerializerOptions() { WriteIndented = true });
-            //using (StreamWriter sw =  new StreamWriter(jsonString)) {
-
-
-            
-            int habitIdTracker = 0;
+            int habitIdTracker = habits[habits.Count - 1].Id; // Should get the last index habit and get the id.
 
             while (programRunning)
             {
