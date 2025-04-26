@@ -1,0 +1,1 @@
+SimpleHabitTracker is a CLI app built with C# and .NET that allows users to add, manage, and persistently track their habits using a JSON file backend. It was developed as part of a focused practice project to improve program structure, defensive coding, and data persistence skills. This project was suggested by ChatGPT, and all the code was written by me. (No vibe coding here)
